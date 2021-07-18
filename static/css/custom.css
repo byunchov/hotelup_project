@@ -1,0 +1,237 @@
+.bg-dash-panel {
+    background-color: #44adc7;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #44adc7), to(#178ba8));
+    background-image: linear-gradient(180deg, #44adc7 10%, #178ba8 100%);
+    background-size: cover;
+  }
+
+  .bg-dash-panel-inv {
+    background-color: #44adc7;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #44adc7), to(#178ba8));
+    background-image: linear-gradient(0deg, #44adc7 10%, #178ba8 100%);
+    background-size: cover;
+  }
+
+.brand-font {
+  font-family:'Pacifico',cursive;
+}
+
+.brand-text{
+  font-family:'Pacifico',cursive;
+  font-size:1.7rem;
+}
+
+  .text-red {
+    color: #e81500 !important;
+  }
+
+  .text-orange {
+    color: #f76400 !important;
+  }
+
+  .text-yellow {
+    color: #f4a100 !important;
+  }
+
+  .text-green {
+    color: #00ac69 !important;
+  }
+
+  .text-teal {
+    color: #00ba94 !important;
+  }
+
+  .text-cyan {
+    color: #00cfd5 !important;
+  }
+
+  .text-blue {
+    color: #0061f2 !important;
+  }
+
+  .text-indigo {
+    color: #5800e8 !important;
+  }
+
+  .text-purple {
+    color: #6900c7 !important;
+  }
+
+  .text-pink {
+    color: #e30059 !important;
+  }
+
+  .text-red-soft {
+    color: #f1e0e3 !important;
+  }
+
+  .text-orange-soft {
+    color: #f3e7e3 !important;
+  }
+
+  .text-yellow-soft {
+    color: #f2eee3 !important;
+  }
+
+  .text-green-soft {
+    color: #daefed !important;
+  }
+
+  .text-teal-soft {
+    color: #daf0f2 !important;
+  }
+
+  .text-cyan-soft {
+    color: #daf2f8 !important;
+  }
+
+  .text-blue-soft {
+    color: #dae7fb !important;
+  }
+
+  .text-indigo-soft {
+    color: #e3ddfa !important;
+  }
+
+  .text-purple-soft {
+    color: #e4ddf7 !important;
+  }
+
+  .text-pink-soft {
+    color: #f1ddec !important;
+  }
+
+  .text-gray-100 {
+    color: #f2f6fc !important;
+  }
+
+  .text-gray-200 {
+    color: #e0e5ec !important;
+  }
+
+  .text-gray-300 {
+    color: #d4dae3 !important;
+  }
+
+  .text-gray-400 {
+    color: #c5ccd6 !important;
+  }
+
+  .text-gray-500 {
+    color: #a7aeb8 !important;
+  }
+
+  .text-gray-600 {
+    color: #69707a !important;
+  }
+
+  .text-gray-700 {
+    color: #4a515b !important;
+  }
+
+  .text-gray-800 {
+    color: #363d47 !important;
+  }
+
+  .text-gray-900 {
+    color: #212832 !important;
+  }
+
+  .fw-100 {
+    font-weight: 100 !important;
+  }
+
+  .fw-200 {
+    font-weight: 200 !important;
+  }
+
+  .fw-300 {
+    font-weight: 300 !important;
+  }
+
+  .fw-400 {
+    font-weight: 400 !important;
+  }
+
+  .fw-500 {
+    font-weight: 500 !important;
+  }
+
+  .fw-600 {
+    font-weight: 600 !important;
+  }
+
+  .fw-700 {
+    font-weight: 700 !important;
+  }
+
+  .fw-800 {
+    font-weight: 800 !important;
+  }
+
+  .fw-900 {
+    font-weight: 900 !important;
+  }
+
+  .fw-light {
+    font-weight: 300 !important;
+  }
+  
+  .fw-lighter {
+    font-weight: lighter !important;
+  }
+  
+  .fw-normal {
+    font-weight: 400 !important;
+  }
+  
+  .fw-bold {
+    font-weight: 500 !important;
+  }
+  
+  .fw-bolder {
+    font-weight: bolder !important;
+  }
+
+  .text-white-75 {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .text-white-25 {
+    color: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  .text-black-75 {
+    color: rgba(0, 0, 0, 0.75) !important;
+  }
+
+  .text-black-25 {
+    color: rgba(0, 0, 0, 0.25) !important;
+  }
+
+  .text-xs {
+    font-size: 0.75rem !important;
+  }
+
+  .text-sm {
+    font-size: 0.875rem !important;
+  }
+
+  .text-lg {
+    font-size: 1.25rem !important;
+  }
+
+  .text-xl {
+    font-size: 2.5rem !important;
+  }
+
+  .invoice .invoice-brand-img {
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .invoice .table tbody tr td,
+  .invoice .dataTable-table tbody tr td {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }

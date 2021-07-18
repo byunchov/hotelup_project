@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="Bozhidar Yunchov" />
+  <title>СВ. ИВАН РИЛСКИ</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="#page-top">СВ. ИВАН РИЛСКИ</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">За нас</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Услуги</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacts">Контакти</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'list_rooms' %}">Резервирай</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Master head -->
+  <header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex flex-row h-100 align-items-center justify-content-center">
+      <div class="row w-100">
+        <div class="col-lg-5">
+          <div class="card p-3">
+            <!-- <div class="card-header">Резервирай онлайн</div> -->
+            <div class="card-body">
+              <h4 class="card-title mb-4 text-uppercase">Резервирай онлайн</h4>
+              <!-- <p class="card-text">Отдай се на заслужен релакс</p> -->
+              <form method="GET" action="{% url 'list_rooms' %}">
+                <div class="form-group mb-3">
+                  <label for="id_check_in" class="mb-2">Дата на настаняване</label>
+                  <input type="date" class="form-control" id="id_check_in" name="checkin" required>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="id_check_out" class="mb-2">Дата на напускане</label>
+                  <input type="date" class="form-control" id="id_check_out" name="checkout" required>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="id_guest_count" class="mb-2">Брой гости</label>
+                  <input type="number" min="1" max="15" class="form-control" id="id_guest_count" name="capacity" value="1">
+                </div>
+                <button class="btn btn-primary mt-2" type="submit">Намери стая</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- About-->
+  <section class="about-section bg-dark" id="about">
+    <div class="container px-4 px-lg-5">
+      <!-- Featured Project Row-->
+      <div class="row gx-0 align-items-center">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="text-white mb-4">ИНФОРМАЦИЯ</h2>
+            <hr class="my-4 w-25 text-white" style="height:3px;" />
+            <p class="text-white-50 mb-0">
+              СПА Ризорт Св. Иван Рилски се намира в най-известния български ски курорт - Банско, само на 160 км. от
+              София. Сгушен в прегръдките на планината и само на 10 минути от ски лифта, комплексът се състои от хотел
+              със
+              113 стаи, СПА Център с площ от над 1 000 кв.м. и 4 апартаментни къщи със 162 апартамента (хотелско
+              настаняване се предлага в 80 от тях). Архитектурата е в типичния алпийски стил, съчетан с модерен интериор
+              от дърво, камък и много светлина.
+            </p>
+            <p class="text-white-50 mt-4 mb-0">
+              Изцяло реновиран през 2021 г., хотелът предлага целогодишна All-Inclusive програма, модерна база и голямо
+              разнообразие от услуги – СПА Център на две нива с екслузивна зона за възрастни, отопляем акватоничен
+              басейн
+              и джакузи, външен отопляем акватоничен басейн и джакузи, съвременно оборудвана фитнес зала, ресторант с
+              панорамна тераса, лоби бар, лаундж зона, детски кът, конферентни зали, магазин, ски гардероб и др.
+            </p>
+            <p class="text-white-50 mt-4 mb-0">
+              Простиращ се на площ от 16 000 кв.м., целогодишният СПА Ризорт Св. Иван Рилски е охраняем комплекс от
+              затворен тип и разполага с вътрешен двор с детска площадка, закрит паркинг и безплатен Wi-Fi на цялата си
+              територия.
+            </p>
+          </div>
+        </div>
+      </div>
+  </section>
+  <!-- Services -->
+  <section class="services-section bg-light" id="services">
+    <div class="container px-4 px-lg-5">
+      <h2 class="text-black text-uppercase mb-4">Услуги</h2>
+      <hr class="mt-4 mb-5 text-black" style="height:3px;width:15%;">
+      <!-- Service 1 Row-->
+      <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+        <div class="col-lg-6"><img class="img-fluid" src="{% static 'assets/img/bg-rest-1.jpg' %}"
+            alt="РЕСТОРАНТ CHEF'S KITCHEN" />
+        </div>
+        <div class="col-lg-6">
+          <div class="bg-black text-center h-100 project">
+            <div class="d-flex h-100">
+              <div class="project-text w-100 my-auto text-center text-lg-left">
+                <h4 class="text-white text-uppercase">РЕСТОРАНТ CHEF'S KITCHEN</h4>
+                <hr class="my-3 w-25 mx-auto text-white" style="height:3px;" />
+                <p class="mb-0 text-white-50">
+                  Светъл и просторен, ресторантът разполага със 180 места в уютен интериор, както и тераса,
+                  разкриваща панорамни гледки към Рила, Пирин и красивите пейзажи наоколо.
+                </p>
+                <hr class="d-none d-lg-block mb-0 ms-0" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Service 2 Row -->
+      <div class="row gx-0 justify-content-center">
+        <div class="col-lg-6"><img class="img-fluid" src="{% static 'assets/img/bg-spa-1.jpg' %}" alt="СПА Harmony" />
+        </div>
+        <div class="col-lg-6 order-lg-first">
+          <div class="bg-black text-center h-100 project">
+            <div class="d-flex h-100">
+              <div class="project-text w-100 my-auto text-center text-lg-right">
+                <h4 class="text-white text-uppercase">СПА “Harmony”</h4>
+                <hr class="my-3 w-25 mx-auto text-white" style="height:3px;" />
+                <p class="mb-0 text-white-50">
+                  Вашето спокойствие е гарантирано в ръцете и грижите на СПА екипът на “Harmony”.
+                  Високото ниво на професионализъм и внедрените строги хигиенни стандарти гарантират Вашето незабравимо
+                  изживяване.
+                </p>
+                <hr class="d-none d-lg-block mb-0 me-0" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Contacts -->
+  <section class="contact-section bg-black p-0" id="contacts">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5">
+        <div class="col-md-10 col-lg-8 my-5">
+          <h2 class="text-white text-uppercase">Контакти</h2>
+          <hr class="my-4 w-25 text-white" style="height:3px;" />
+        </div>
+      </div>
+      <div class="row gx-4 gx-lg-5">
+
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-map-marked-alt fa-2x text-primary mb-2"></i>
+              <h4 class="text-uppercase m-0">Адрес</h4>
+              <hr class="my-4 mx-auto" />
+              <div class="small text-black-50">ул. "Шинова ела" 18, Банско, България</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+              <h4 class="text-uppercase m-0">E-mail</h4>
+              <hr class="my-4 mx-auto" />
+              <div class="small text-black-50"><a
+                  href="mailto:reservations@saintivanrilski.com">reservations@saintivanrilski.com</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+              <i class="fas fa-mobile-alt fa-2x text-primary mb-2"></i>
+              <h4 class="text-uppercase m-0">Телефон</h4>
+              <hr class="my-4 mx-auto" />
+              <a class="small text-black-50" href="tel:+359884991999">+359 884 991 999</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="social d-flex justify-content-center">
+        <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+        <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+        <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </section>
+  <!-- Footer-->
+  <footer class="footer bg-black small text-center text-white-50">
+    <div class="container px-4 px-lg-5">Copyright &copy; Your Website 2021</div>
+  </footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="{% static 'js/scripts.js' %}"></script>
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>

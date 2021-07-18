@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="description" content="" />
+  <meta name="author" content="Bozhidar Yunchov" />
+  <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+  <title>{% block page_title %}Home{% endblock %} | hotelUp!</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+  {% block styles %}{% endblock styles %}
+
+</head>
+
+<body style="background-color: #FAFAFA;">
+  <header>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #00BCD4;"> -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand brand-text ml-lg-5" href="{% url 'list_rooms' %}">hotelUp!</a>
+        <ul class="navbar-nav ml-auto mr-5 mt-2 mt-lg-0">
+          <li class="nav-item mr-2">
+            <a class="nav-link" href="{% url 'home' %}">Начало</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'list_rooms' %}">Резервирай</a>
+          </li>
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="#">За нас</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Контакти</a>
+          </li> {% endcomment %}
+        </ul>
+
+        {% if user.is_authenticated %}
+        <div class="btn-group mr-5">
+          <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ user.first_name }}
+          </button>
+          <div class="dropdown-menu dropdown-menu-lg-right user-dropdown-menu">
+            <a class="dropdown-item" href="{% url 'user_dash' %}">Резервации</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'logout' %}">Изход</a>
+          </div>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-light mr-5">Вход</a>
+        {% endif %}
+        
+      </div>
+    </nav>
+  </header>
+
+  <main class="my-5">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer class="sticky-bottom">
+    <!-- <div class="text-center text-white p-3" style="background-color:#00BCD4;"> -->
+      <div class="text-center text-white p-3 bg-dark">
+      Copyright © <a class="text-white" href="{% url 'list_rooms' %}">hotelUp!</a> 2021
+    </div>
+  </footer>
+
+  {% block helpers %}
+  {% endblock %}
+
+  <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.0.1/src/js.cookie.min.js"></script>
+  <script src="{% static 'js/navigation.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+{% extends 'frontend/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load templatehelpers %}
+
+{% block page_title %}Room list{% endblock page_title %}
+
+{% block content %}
+ <div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="card bg-warning text-white mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Търсене</h5>
+          <form method="GET">
+            {{ date_form|crispy }}
+            {{ filter.form|crispy }}
+            <button type="submit" class="btn btn-primary btn-block mt-4">Филтрирай</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-ligth mb-3">
+        <div class="card-body py-0">
+          {% if avail_list %}
+            {% for room in avail_list %}
+              <!-- Room detail card -->
+          <div class="card bg-light mx-1 my-4">
+            <div class="row g-0 m-0">
+              <div class="col-md-4 rounded-left"
+                style="background: url(/media/{{ room.thumbnail }});background-position: center;background-size: cover;">
+                <!-- <img src="" class="img-fluid rounded-start" /> -->
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title font-weight-bold"><a>{{ room }}</a></h4>
+                  <ul class="list-unstyled list-inline mb-0">
+                    <li class="list-inline-item">
+                      <p class="text-muted"><i class="fas fa-bed fa-s mr-2"></i> {{room.beds}}</p>
+                    </li>
+                    <li class="list-inline-item">
+                      <p class="text-muted"><i class="fas fa-male fa-s mr-2"></i> {{room.capacity}}</p>
+                    </li>
+                  </ul>
+                  <ul class="list-unstyled list-inline mb-2">
+                    <li class="list-inline-item m-0">
+                      <h5 class="h5 mb-2">{{ room.rate }} BGN</h5>
+                    </li>
+                    <li class="list-inline-item mx-1">
+                      <small class="small text-muted"> на човек</small>
+                    </li>
+                  </ul>
+                  <p class="card-text"
+                    style="overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;">
+                    {{ room.description }}
+                  </p>
+                  <a href="{% url 'book_room' room.pk %}" class="btn btn-primary mb-0">Резервирай сега <i class="fas fa-angle-right ml-2"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Room detail card -->
+            {% endfor %}
+          {% else %}
+            <h4 class="text-center m-5">Няма намерени резултати!</h4>
+          {% endif %}
+
+          {% if avail_list.has_other_pages %}
+            <ul class="pagination justify-content-center">
+                {% if avail_list.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="{% relative_url avail_list.previous_page_number 'page' request.GET.urlencode %}"><i class="fas fa-angle-left"></i></a>
+                  </li>
+                {% else %}                  
+                  <li class="page-item disabled"><span class="page-link"><i class="fas fa-angle-left"></i></span></li>
+                {% endif %}
+              {% for i in avail_list.paginator.page_range %}
+                {% if avail_list.number == i %}
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+                  </li>
+                {% else %}
+                  <li class="page-item">
+                    <a class="page-link" href="{% relative_url i 'page' request.GET.urlencode %}">{{ i }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              {% if avail_list.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="{% relative_url avail_list.next_page_number 'page' request.GET.urlencode %}"><i class="fas fa-angle-right"></i></a>
+                </li>
+              {% else %}
+                <li class="page-item disabled"><span class="page-link"><i class="fas fa-angle-right"></i></span></li>
+              {% endif %}
+            </ul>
+          {% endif %}
+          
+          {% comment %} <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">2</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul> {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

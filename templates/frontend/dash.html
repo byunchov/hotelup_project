@@ -1,0 +1,230 @@
+{% extends 'frontend/base.html' %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">   
+    <div class="row mb-5">
+        <!-- Active bookings -->
+        <div class="col-lg-4">
+            <div class="card bg-success text-white">
+                <div class="card-header h5 text-center">Активни резервации</div>
+                <div class="card-body">
+                    <h1 class="text-center">{% if 'active' in counts %}{{counts.active}}{% else %}0{% endif %}</h1>
+                </div>
+            </div>
+        </div>
+        <!-- Finished bookings -->
+        <div class="col-lg-4">
+            <div class="card bg-info text-white">
+                <div class="card-header h5 text-center">Завършени резервации</div>
+                <div class="card-body">
+                    <h1 class="text-center">{% if 'finished' in counts %}{{counts.finished}}{% else %}0{% endif %}</h1>
+                </div>
+            </div>
+        </div>
+        <!-- Canceled bookings -->
+        <div class="col-lg-4">
+            <div class="card bg-danger text-white">
+                <div class="card-header h5 text-center">Отменени резервации</div>
+                <div class="card-body">
+                    <h1 class="text-center">{% if 'canceled' in counts %}{{counts.canceled}}{% else %}0{% endif %}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}danger{% elif message.tags == 'info' %}info{% endif %} alert-dismissible mb-5 fade show" role="alert">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>        
+        {% endfor %}
+    {% endif %}
+    <!-- bookings table -->
+    <div class="row">
+        <div class="col">
+            <div class="row justify-content-between align-items-center px-3">
+                <div class="col-12 col-lg-auto text-lg-start">
+                    <h3 class="m-0">Списък с резервации</h3>
+                </div>
+                <div class="col-12 col-lg-auto text-center text-lg-end">
+                    <a href="{% url 'list_rooms' %}" class="btn btn-outline-success btn-sm"><i class="fas fa-plus mx-1"></i> Резервирай стая</a>
+                </div>
+            </div>
+            <div class="card p-4 mt-4">
+                {%if booking_list%}
+                <div class="form-inline mb-4">
+                    <div class="form-group">
+                    <label for="filterState" class="mr-3">Филтрирай по <b class="ml-1">Статус:</b></label>
+                    <select id="filterState" class="form-control">
+                        <option value="">----</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover m-0" id="userBookings">
+                        <thead>
+                            <th>Резервация №</th>
+                            <th>Регистрирана на</th>
+                            <th>Стая</th>
+                            <th>Период на престой</th>
+                            <th>Цена</th>
+                            <th>Статус</th>
+                            <th>Действие</th>
+                        </thead>
+                        <tbody>
+                            {% for book in booking_list %}
+                            <tr>
+                                <td>{{ book.pk }}</td>
+                                <td>{{ book.created_at }}</td>
+                                <td>{{ book.room.number }} - {{ book.room.category }}</td>
+                                <td>{{ book.check_in }} - {{ book.check_out }}</td>
+                                <td>{{ book.total_price }} BGN</td>
+                                <td><span class="badge badge-pill badge-{% if book.status == 'active' %}success{% elif book.status == 'canceled' %}danger{% else %}info{% endif %}">{{ book.status }}</span></td>
+                                <td><button class="btn btn-sm btn-danger btn-block delete" id="{{ book.pk }}" {% if book.status == 'canceled' or book.status == 'finished' %}disabled{% endif %}>Отмени</button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <h2 class="text-center mt-5">Няма направени резервации.</h2>
+                <p class="text-center">Разгледайте наличните стаи и направете резервация още сега!</p>
+                <a href="{% url 'list_rooms' %}" class="btn btn-outline-info btn-lg mx-auto my-2">Резервирай стая</a>
+                {% endif %}                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block helpers %}
+
+<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+  <div id="msgToast" class="toast hide" role="alert" aria-live="assertive" data-autohide="false">
+    <div class="toast-header">
+      <strong class="mr-auto" id="msgToastTitle"></strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body" id="msgToastText"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="cofirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p class="h3">
+          Сигурни ли сте, че искате да отмените резервацията?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">
+          <i class="fas fa-times mr-2"></i> Затвори
+        </button>
+        <button type="button" name="confirm" id="confirm" class="btn btn-danger confirm">
+          <i class="fas fa-check mr-2"></i> Потвърди
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="booking_id">
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+
+var pcol;
+
+  $(document).ready(function () {
+    let csrftoken = Cookies.get('csrftoken');
+    let bookin_table = $("#userBookings");
+    let book_id = $('#booking_id');
+    let cofirmModal = $('#cofirmModal');
+    let toast = $('#msgToast'),
+        toast_title = $('#msgToastTitle'),
+        toast_text = $('#msgToastText');
+
+    bookin_table.DataTable({
+        initComplete: function () {
+            let column = pcol = this.api().columns(5);
+            let select = $('#filterState')
+                .appendTo( $(column.footer()).empty() )
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
+
+                    column
+                        .search( val ? '^'+val+'$' : '', true, false )
+                        .draw();
+                });
+
+            let ar = []
+
+            column.data()[0].forEach( function ( d, j ) {
+                ar.push(d.replace(/(<([^>]+)>)/ig,""));
+            } );
+
+            let unique = [ ... new Set(ar)].sort();
+
+            unique.forEach( function ( tag, j ) {
+                select.append(`<option value="${tag}">${tag}</option>`);
+            });
+
+            delete ar;
+            delete unique;
+            
+        }
+    });
+
+    bookin_table.on('click', '.delete', function () {
+      cofirmModal.modal('show');
+      book_id.val($(this).attr("id"));
+    });
+
+    cofirmModal.on('click', '.confirm', function (event) {
+      event.preventDefault();
+      let booking_id = book_id.val();
+      $('#confirm').attr('disabled', 'disabled');
+      $.ajax({
+        url: "{% url 'cancel_booking' %}",
+        headers: { 'X-CSRFToken': csrftoken },
+        method: "POST",
+        data: { 'booking_id': booking_id },
+        success: function (data) {
+          cofirmModal.modal('hide');
+          $('#confirm').attr('disabled', false);
+          //book_id.val('');
+          if(data.status == 200){
+              setTimeout(() => window.location.reload(), 3000);
+              toast_title.text('Success');
+            //window.location.reload();
+          }
+          else if(data.status == 401 || data.status == 404){
+              toast_title.text('Error');
+          }
+          toast_text.text(data.msg);
+            toast.toast('show');
+          console.log(data);
+        },
+      });
+    });
+
+  });
+
+</script>
+{% endblock scripts %}
