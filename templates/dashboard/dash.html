@@ -147,24 +147,23 @@
 
 <script>
 
-var pcol;
-
   $(document).ready(function () {
-    let csrftoken = Cookies.get('csrftoken');
-    let bookin_table = $("#userBookings");
-    let book_id = $('#booking_id');
-    let cofirmModal = $('#cofirmModal');
-    let toast = $('#msgToast'),
+    const csrftoken = Cookies.get('csrftoken');
+    const bookin_table = $("#userBookings");
+    const book_id = $('#booking_id');
+    const cofirm_modal = $('#cofirmModal'),
+        confirm_btn = $('#confirm');
+    const toast = $('#msgToast'),
         toast_title = $('#msgToastTitle'),
         toast_text = $('#msgToastText');
 
     bookin_table.DataTable({
         initComplete: function () {
-            let column = pcol = this.api().columns(5);
-            let select = $('#filterState')
+            let column = this.api().columns(5);
+            const select = $('#filterState')
                 .appendTo( $(column.footer()).empty() )
                 .on( 'change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex(
+                    let val = $.fn.dataTable.util.escapeRegex(
                         $(this).val()
                     );
 
@@ -173,7 +172,7 @@ var pcol;
                         .draw();
                 });
 
-            let ar = []
+            let ar = [];
 
             column.data()[0].forEach( function ( d, j ) {
                 ar.push(d.replace(/(<([^>]+)>)/ig,""));
@@ -186,20 +185,19 @@ var pcol;
             });
 
             delete ar;
-            delete unique;
-            
+            delete unique;            
         }
     });
 
     bookin_table.on('click', '.delete', function () {
-      cofirmModal.modal('show');
+      cofirm_modal.modal('show');
       book_id.val($(this).attr("id"));
     });
 
-    cofirmModal.on('click', '.confirm', function (event) {
+    cofirm_modal.on('click', '.confirm', function (event) {
       event.preventDefault();
       let booking_id = book_id.val();
-      $('#confirm').attr('disabled', 'disabled');
+      confirm_btn.attr('disabled', 'disabled');
       $.ajax({
         url: "{% url 'cancel_booking' %}",
         headers: { 'X-CSRFToken': csrftoken },
@@ -207,12 +205,12 @@ var pcol;
         data: { 'booking_id': booking_id },
         success: function (data) {
           cofirmModal.modal('hide');
-          $('#confirm').attr('disabled', false);
+          confirm_btn.attr('disabled', false);
           //book_id.val('');
           if(data.status == 200){
+            // show toast, wait for 3s and reload the page to show changes
               setTimeout(() => window.location.reload(), 3000);
               toast_title.text('Success');
-            //window.location.reload();
           }
           else if(data.status == 401 || data.status == 404){
               toast_title.text('Error');

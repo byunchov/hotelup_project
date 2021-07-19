@@ -45,6 +45,9 @@ INSTALLED_APPS = [
 
     # custom
     'frontend',
+    'booking',
+    'rooms',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

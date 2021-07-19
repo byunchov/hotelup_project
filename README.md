@@ -28,5 +28,13 @@
 ```[name]\Scripts\activate.bat```
 5. Инсталирайте необходимите модули:
 ```pip install -r requirements.txt``` или ```pip3 install -r requirements.txt```
-6. Стартирайте сървъра:
+6. Направите миграция на моделите:
+  - ```python manage.py makemigrations```
+  - ```python manage.py migrate```
+    -Използваната СУБД е SQLite3, понеже е лесно преносима и не се налага стартирането на отделен сървър за тестови цели.
+7. Заредете примерните данни за модела Room:
+  - ```python manage.py loaddata rooms.json```
+8. Създайте администратоски акаунт, за да можете да ползвате ```Django Admin Panel```:
+```python manage.py createsuperuser```
+9. Стартирайте сървъра:
 ```python manage.py runserver``` или ```python3 manage.py runserver```

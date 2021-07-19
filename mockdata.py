@@ -8,7 +8,7 @@ with open('/home/bobiyu/Programming/Stage DSS/MOCK_DATA.json', 'r') as f:
     for i, row in enumerate(data):
         row['thumbnail'] = f"room_thumbnails/t{row['number']}.jpg"
         rec = {
-            "model": "frontend.room",
+            "model": "rooms.room",
             "pk": i + 1,
             "fields": row
         }

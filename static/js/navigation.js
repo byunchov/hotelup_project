@@ -2,14 +2,14 @@
     "use strict";
 
     // Add active state to sidbar nav links
-    var path = window.location.href.split('?')[0]; // because the 'href' property of the DOM element is the absolute path
+    const path = window.location.href.split('?')[0]; // because the 'href' property of the DOM element is the absolute path
     $("#navbarTogglerDemo01 a.nav-link").each(function () {
         if (this.href === path) {
             $(this).addClass("active");
         }
     });
 
-    var user_menu_sel = $("div.dropdown-menu.user-dropdown-menu a.dropdown-item");
+    const user_menu_sel = $("div.dropdown-menu.user-dropdown-menu a.dropdown-item");
 
     user_menu_sel.each(function () {
         if (this.href === path) {

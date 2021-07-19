@@ -1,5 +1,5 @@
 import datetime
-from frontend.models import Booking, Room
+from booking.models import Booking
 
 
 def is_room_available(room, checkin_date, checkout_date):
@@ -19,22 +19,3 @@ def is_room_available(room, checkin_date, checkout_date):
 
     return all(available_rooms)
 
-'''
-from frontend.utilities.booking_helper import is_room_available
-from frontend.models import Room, Booking
-r104 = Room.objects.filter(number=104).first()
-is_room_available(r104, '2021-07-12','2021-07-21')
-'''
-
-# def test_functions():
-#     checkin = '2021-07-21'
-#     checkout = '2021-07-25'
-#     avail_rooms = []
-
-#     lux_rooms = Room.objects.filter(category='LUX', capacity=2)
-
-# for room in lux_rooms:
-#     if is_room_available(room, checkin, checkout):
-#         avail_rooms.append(room)
-
-# print(avail_rooms)
