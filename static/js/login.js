@@ -64,11 +64,13 @@ $(function() {
 				$this.attr('type', 'password');
 				$this.removeClass("show");
 				$(this).removeClass("btn-outline-primary");
+				$(this).addClass("btn-primary");
 			}else{
 				$this.attr('type', 'text');
 				$this.val($("#passeye-"+i).val());				
 				$this.addClass("show");
 				$(this).addClass("btn-outline-primary");
+				$(this).removeClass("btn-primary");
 			}
 		});
 	});

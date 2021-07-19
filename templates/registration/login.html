@@ -1,12 +1,12 @@
 {% extends 'registration/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block page_title %}Login{% endblock page_title %}
+{% block page_title %}Вход{% endblock page_title %}
 
 {% block content %}
 <form method="POST">
   {% csrf_token %}
   {{ form|crispy }}
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block mt-4" type="submit">Вход</button>
 </form>
 {% endblock content %}
