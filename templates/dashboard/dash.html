@@ -172,15 +172,15 @@
                         .draw();
                 });
 
-            let ar = [];
+            let col_vals = [];
 
             column.data()[0].forEach( function ( d, j ) {
-                ar.push(d.replace(/(<([^>]+)>)/ig,""));
+                col_vals.push(d.replace(/(<([^>]+)>)/ig,""));
             } );
 
-            let unique = [ ... new Set(ar)].sort();
+            let unique_vals = [ ... new Set(col_vals)].sort();
 
-            unique.forEach( function ( tag, j ) {
+            unique_vals.forEach( function ( tag, j ) {
                 select.append(`<option value="${tag}">${tag}</option>`);
             });
 
@@ -204,7 +204,7 @@
         method: "POST",
         data: { 'booking_id': booking_id },
         success: function (data) {
-          cofirmModal.modal('hide');
+          cofirm_modal.modal('hide');
           confirm_btn.attr('disabled', false);
           //book_id.val('');
           if(data.status == 200){
