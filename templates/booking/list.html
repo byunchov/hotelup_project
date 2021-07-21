@@ -4,10 +4,20 @@
 {% load crispy_forms_tags %}
 {% load templatehelpers %}
 
-{% block page_title %}Room list{% endblock page_title %}
+{% block page_title %}Намери стая{% endblock page_title %}
 
 {% block content %}
  <div class="container">
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}danger{% elif message.tags == 'info' %}info{% endif %} alert-dismissible mb-5 fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+  {% endif %}
   <div class="row">
     <div class="col-lg-3">
       <div class="card bg-warning text-white mb-3">
@@ -31,7 +41,6 @@
             <div class="row g-0 m-0">
               <div class="col-md-4 rounded-left"
                 style="background: url(/media/{{ room.thumbnail }});background-position: center;background-size: cover;">
-                <!-- <img src="" class="img-fluid rounded-start" /> -->
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -46,7 +55,7 @@
                   </ul>
                   <ul class="list-unstyled list-inline mb-2">
                     <li class="list-inline-item m-0">
-                      <h5 class="h5 mb-2">{{ room.rate }} BGN</h5>
+                      <h5 class="h5 mb-2">{{ room.price }} BGN</h5>
                     </li>
                     <li class="list-inline-item mx-1">
                       <small class="small text-muted"> на човек</small>

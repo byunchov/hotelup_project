@@ -1,6 +1,6 @@
 {% extends 'frontend/base.html' %}
 
-{% block page_title %}Book room nnn{% endblock %}
+{% block page_title %}Резервация на стая {{ room.number }}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -53,7 +53,7 @@
                   </td>
                   <td class="text-right fw-bold align-middle">{{ num_guests }}</td>
                   <td class="text-right fw-bold align-middle">{{ nights }}</td>
-                  <td class="text-right fw-bold align-middle">{{ room.rate }} BGN</td>
+                  <td class="text-right fw-bold align-middle">{{ room.price }} BGN</td>
                   <td class="text-right fw-bold align-middle">{{ billing.room_stay }} BGN</td>
                 </tr>
                 <!-- Invoice subtotal-->

@@ -28,12 +28,12 @@
   <header>
     <!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #00BCD4;"> -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand brand-text ml-lg-5" href="{% url 'list_rooms' %}">hotelUp!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+        aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand brand-text ml-lg-5" href="{% url 'list_rooms' %}">hotelUp!</a>
+      <div class="collapse navbar-collapse" id="navbarToggler">        
         <ul class="navbar-nav ml-auto mr-5 mt-2 mt-lg-0">
           <li class="nav-item mr-2">
             <a class="nav-link" href="{% url 'home' %}">Начало</a>
@@ -58,6 +58,10 @@
           <div class="dropdown-menu dropdown-menu-lg-right user-dropdown-menu">
             <a class="dropdown-item" href="{% url 'user_dash' %}">Резервации</a>
             <div class="dropdown-divider"></div>
+            {% if user.is_superuser %}
+              <a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Админ панел</a>
+              <div class="dropdown-divider"></div>
+            {% endif %}
             <a class="dropdown-item" href="{% url 'logout' %}">Изход</a>
           </div>
         </div>

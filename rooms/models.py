@@ -13,7 +13,7 @@ class Room(models.Model):
     number = models.IntegerField()
     beds = models.IntegerField()
     capacity = models.IntegerField()
-    rate = models.FloatField()
+    price = models.FloatField()
     category = models.CharField(max_length=12, choices=ROOM_CATEGORIES)
     description = models.TextField(null=True)
     thumbnail = models.ImageField(upload_to="room_thumbnails", height_field=None, width_field=None, default='room_thumbnails/t101.jpg')
