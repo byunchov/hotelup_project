@@ -37,17 +37,18 @@
                 <tr class="border-bottom">
                   <td>
                     <div class="d-flex align-items-center">
-                    <img src="/media/{{ room.thumbnail }}" alt="{{ room }}" style="width: 6rem;height: 4rem;" class="rounded-lg">
+                    <img src="/media/{{ room.thumbnail }}" alt="{{ room.room_display_text }}" style="width: 6rem;height: 4rem;" class="rounded-lg">
                         <div class="ml-3">
-                            <div class="fw-bold">{{ room }} от {{ checkin }} до {{ checkout }}</div>
-                             <ul class="list-unstyled list-inline mb-0">
+                            <div class="fw-bold">{{ room.room_display_text }}</div>
+                            <div class="small text-muted">Резервация за периода от {{ checkin }} до {{ checkout }}</div>
+                             {% comment %} <ul class="list-unstyled list-inline mb-0">
                                 <li class="list-inline-item">
                                     <div class="text-muted"><i class="fas fa-bed fa-s mr-2"></i> {{room.beds}}</div>
                                 </li>
                                 <li class="list-inline-item">
                                     <div class="text-muted"><i class="fas fa-male fa-s mr-2"></i> {{room.capacity}}</div>
                                 </li>
-                            </ul>
+                            </ul> {% endcomment %}
                         </div>
                     </div>
                   </td>

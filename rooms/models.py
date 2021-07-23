@@ -18,6 +18,10 @@ class Room(models.Model):
     description = models.TextField(null=True)
     thumbnail = models.ImageField(upload_to="room_thumbnails", height_field=None, width_field=None, default='room_thumbnails/t101.jpg')
 
+    def room_display_text(self) -> str:
+        categories = dict(self.ROOM_CATEGORIES)
+        return f'Стая #{self.number} - {categories.get(self.category)}'
+
     def __str__(self) -> str:
         categories = dict(self.ROOM_CATEGORIES)
         return f'{self.number}. {categories.get(self.category)} - ({self.capacity}, {self.beds})'
