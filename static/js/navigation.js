@@ -3,7 +3,7 @@
 
     // Add active state to sidbar nav links
     const path = window.location.href.split('?')[0]; // because the 'href' property of the DOM element is the absolute path
-    $("#navbarTogglerDemo01 a.nav-link").each(function () {
+    $("#navbarToggler a.nav-link").each(function () {
         if (this.href === path) {
             $(this).addClass("active");
         }
